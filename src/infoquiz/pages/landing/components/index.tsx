@@ -2,16 +2,12 @@ import React from "react";
 import Styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { Button } from "infoquiz/styles/atoms/button";
-import { Footer } from "infoquiz/styles/atoms/footer";
+import { Layout } from "infoquiz/styles/layout/";
 
-const WrapLanding = Styled.div`
-
- min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-`;
+import computer from "infoquiz/assets/img/illustrationGo-landing.png";
+import brain from "infoquiz/assets/img/brain-landingIcon.png";
+import emoji from "infoquiz/assets/img/emoji-landingIcon.png";
+import friends from "infoquiz/assets/img/friends-landingIcon.png";
 
 const LandingWelcome = Styled.div`
   text-align: left;
@@ -39,12 +35,14 @@ const WelcomeTextes = Styled.div`
   `;
 const WelcomeTitle = Styled.div`
     margin-top: 20px;
-    font-family: "Poppins-SemiBold";
+    font-family: "Poppins";
+    font-weight:600;
 ${rh.forPortraitTabletUp`   font-size: 18px;`} 
 ${rh.forLandscapeTabletUp` font-size: 22px;`} 
    `;
 
 const WelcomeTexte = Styled.div`
+font-family:"Poppins";
  text-align: left;
     line-height: 18px;
     font-size: 12px;
@@ -62,35 +60,33 @@ const LandingEmoji = Styled.div`
    display: flex;
    justify-content: space-between;
    width: 100%;
-  ${rh.forPortraitTabletUp`  padding: 40px 70px 0 70px;`} 
-    
+  ${rh.forPortraitTabletUp`  padding: 40px 70px 0 70px;`}  
    }
    ${rh.forLandscapeTabletUp`
      padding: 40px 250px 0 250px;`}
-
    & > div {
     margin: 10px;
      width: 70px;
-    ${rh.forMobileUp`
-       width: 90px;`};
-  ${rh.forPortraitTabletUp`   width: 110px;`} ;
-  
-  ${rh.forLandscapeTabletUp`
-     width: 130px;`};
- 
+     ${rh.forMobileUp`width: 90px;`};
+    ${rh.forPortraitTabletUp`width: 110px;`} ;
+    ${rh.forLandscapeTabletUp`width: 130px;`};
+     &>img{ ${rh.forMobileUp`width: 90px;`};
+    ${rh.forPortraitTabletUp`width: 110px;`} ;
+    ${rh.forLandscapeTabletUp`width: 130px;`};}
+   
      & > p {
       margin-top: 5px;
        text-align: center;
-       font-family: "Poppins-Light";
+       font-family: "Poppins";
+       font-weight:300;
        font-size: 12px;
   ${rh.forPortraitTabletUp`font-size: 18px;
 `} }
-
    }`;
 
 export const Landing = () => {
   return (
-    <WrapLanding>
+    <Layout headerUserNotLogged>
       <LandingWelcome>
         <WelcomeTextes>
           <WelcomeTitle>C’est l’heure de faire un infoquiz !</WelcomeTitle>
@@ -100,27 +96,26 @@ export const Landing = () => {
           </WelcomeTexte>
         </WelcomeTextes>
         <WelcomeImage>
-          <img src="./assets/img/illustrationGo-landing.png" alt="ordinateur" />
+          <img src={computer} alt="ordinateur" />
         </WelcomeImage>
       </LandingWelcome>
 
       <LandingEmoji>
         <div>
-          <img src="./assets/img/brain-landingIcon.png" alt="cerveau" />
+          <img src={brain} alt="cerveau" />
           <p>Apprends et dépasse toi !</p>
         </div>
         <div>
-          <img src="./assets/img/emoji-landingIcon.png" alt="emoji" />
+          <img src={emoji} alt="emoji" />
           <p>Amuse toi !</p>
         </div>
         <div>
-          <img src="./assets/img/friends-landingIcon.png" alt="amis" />
+          <img src={friends} alt="amis" />
           <p>Défis tes amis !</p>
         </div>
       </LandingEmoji>
 
       <Button>C'est parti !</Button>
-      <Footer></Footer>
-    </WrapLanding>
+    </Layout>
   );
 };
