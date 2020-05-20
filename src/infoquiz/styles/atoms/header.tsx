@@ -53,7 +53,7 @@ const HeaderUserNotLogged = () => (
   <WrapHeader>
     <Logo />
     <div>
-      <ButtonConnect href="/">Se connecter</ButtonConnect>
+      <ButtonConnect href="/signIn">Se connecter</ButtonConnect>
       <ButtonCreateAccount href="/">Créer un compte</ButtonCreateAccount>
     </div>
   </WrapHeader>
@@ -69,7 +69,7 @@ const HeaderUserLogged = () => (
 const HeaderArrowBackHome = () => (
   <WrapHeader>
     <a href="/">
-      <ArrowBackHome src={arrowBackHomeImage} alt="flêche" />
+      <ArrowBackHome src={arrowBackHomeImage} alt="flèche" />
     </a>
   </WrapHeader>
 );

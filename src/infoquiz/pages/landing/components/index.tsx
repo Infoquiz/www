@@ -2,7 +2,7 @@ import React from "react";
 import Styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { Button } from "infoquiz/styles/atoms/button";
-import { Layout } from "infoquiz/styles/layout/";
+import { Layout } from "infoquiz/styles/layout";
 
 import computer from "infoquiz/assets/img/illustrationGo-landing.png";
 import brain from "infoquiz/assets/img/brain-landingIcon.png";
