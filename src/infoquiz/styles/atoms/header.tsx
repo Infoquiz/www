@@ -82,7 +82,7 @@ export const Header = ({
   headerUserNotLogged: boolean;
   headerUserLogged: boolean;
   headerArrowBackHome: boolean;
-}) => {
+}): JSX.Element => {
   const handleHeader = () => {
     if (headerUserNotLogged) {
       return <HeaderUserNotLogged />;

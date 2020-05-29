@@ -65,7 +65,7 @@ const NotAccountTexte = styled.a`
 
 export const SignIn = () => {
   return (
-    <Layout headerArrowBackHome>
+    <Layout headerArrowBackHome footerWavePinkLower>
       <LoginWrap>
         <Form>
           <Logo />

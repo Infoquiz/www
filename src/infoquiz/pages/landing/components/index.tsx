@@ -83,7 +83,7 @@ const LandingEmoji = Styled.div`
 
 export const Landing = () => {
   return (
-    <Layout headerUserNotLogged>
+    <Layout headerUserNotLogged footerWaveBlue>
       <LandingWelcome>
         <WelcomeTextes>
           <WelcomeTitle>C’est l’heure de faire un infoquiz !</WelcomeTitle>
