@@ -2,7 +2,7 @@ import React from "react";
 import Styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { Button } from "infoquiz/styles/atoms/button";
-import { Layout } from "infoquiz/styles/layout/";
+import { Layout } from "infoquiz/styles/layout";
 
 import computer from "infoquiz/assets/img/illustrationGo-landing.png";
 import brain from "infoquiz/assets/img/brain-landingIcon.png";
@@ -35,14 +35,12 @@ const WelcomeTextes = Styled.div`
   `;
 const WelcomeTitle = Styled.div`
     margin-top: 20px;
-    font-family: "Poppins";
     font-weight:600;
 ${rh.forPortraitTabletUp`   font-size: 18px;`} 
 ${rh.forLandscapeTabletUp` font-size: 22px;`} 
    `;
 
 const WelcomeTexte = Styled.div`
-font-family:"Poppins";
  text-align: left;
     line-height: 18px;
     font-size: 12px;
@@ -77,7 +75,6 @@ const LandingEmoji = Styled.div`
      & > p {
       margin-top: 5px;
        text-align: center;
-       font-family: "Poppins";
        font-weight:300;
        font-size: 12px;
   ${rh.forPortraitTabletUp`font-size: 18px;
@@ -86,7 +83,7 @@ const LandingEmoji = Styled.div`
 
 export const Landing = () => {
   return (
-    <Layout headerUserNotLogged>
+    <Layout headerUserNotLogged footerWaveBlue>
       <LandingWelcome>
         <WelcomeTextes>
           <WelcomeTitle>C’est l’heure de faire un infoquiz !</WelcomeTitle>

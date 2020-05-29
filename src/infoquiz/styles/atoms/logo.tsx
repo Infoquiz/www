@@ -5,7 +5,6 @@ import { Color } from "infoquiz/styles/consts";
 
 const LogoInfoquiz = Styled.div`
  ${rh.forPortraitTabletUp`font-size: 28px;`}
-  font-family: "Poppins";
   font-weight:800;
   font-size: 22px;
   & > p {

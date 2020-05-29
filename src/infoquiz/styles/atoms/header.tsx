@@ -12,12 +12,11 @@ ${rh.forPortraitTabletUp`padding: 40px 40px 0 40px;`}
   align-items: center;
   justify-content: space-between;
   width: 100vw;
-  font-family:"Poppins";
+
 `;
 
 const ButtonConnect = Styled.a`
 ${rh.forPortraitTabletUp`font-size: 18px;`}
-font-family: "Poppins";
 font-weight:600;
 text-decoration: none;
 margin-left: 15px;
@@ -29,7 +28,7 @@ border-radius: 10px;`;
 
 const ButtonCreateAccount = Styled.a`
 ${rh.forPortraitTabletUp`font-size: 18px;`}
-font-family: "Poppins";
+
 font-weight:600;
 text-decoration: none;
 margin-left: 15px;
@@ -47,13 +46,14 @@ color: red;
     font-size: 18px;
 `;
 const ArrowBackHome = Styled.img` width: 30px;
-margin: 20px;`;
+margin: 5px;
+${rh.forPortraitTabletUp`margin: 20px;`}`;
 
 const HeaderUserNotLogged = () => (
   <WrapHeader>
     <Logo />
     <div>
-      <ButtonConnect href="/">Se connecter</ButtonConnect>
+      <ButtonConnect href="/signIn">Se connecter</ButtonConnect>
       <ButtonCreateAccount href="/">Créer un compte</ButtonCreateAccount>
     </div>
   </WrapHeader>
@@ -69,7 +69,7 @@ const HeaderUserLogged = () => (
 const HeaderArrowBackHome = () => (
   <WrapHeader>
     <a href="/">
-      <ArrowBackHome src={arrowBackHomeImage} alt="flêche" />
+      <ArrowBackHome src={arrowBackHomeImage} alt="flèche" />
     </a>
   </WrapHeader>
 );
@@ -82,7 +82,7 @@ export const Header = ({
   headerUserNotLogged: boolean;
   headerUserLogged: boolean;
   headerArrowBackHome: boolean;
-}) => {
+}): JSX.Element => {
   const handleHeader = () => {
     if (headerUserNotLogged) {
       return <HeaderUserNotLogged />;

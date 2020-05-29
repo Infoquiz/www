@@ -11,6 +11,8 @@ const WrapLayout = Styled.div`
   justify-content: space-between;
   align-items: center;
   background-color:${Color.lightGrey};
+  font-family: "Poppins";
+
 `;
 
 export const Layout = ({
@@ -18,11 +20,15 @@ export const Layout = ({
   headerUserNotLogged = false,
   headerUserLogged = false,
   headerArrowBackHome = false,
+  footerWaveBlue = false,
+  footerWavePinkLower = false,
 }: {
   children: any;
   headerUserNotLogged?: boolean;
   headerUserLogged?: boolean;
   headerArrowBackHome?: boolean;
+  footerWaveBlue?: boolean;
+  footerWavePinkLower?: boolean;
 }) => (
   <WrapLayout>
     <Header
@@ -31,6 +37,9 @@ export const Layout = ({
       headerArrowBackHome={headerArrowBackHome}
     />
     {children}
-    <Footer />
+    <Footer
+      footerWaveBlue={footerWaveBlue}
+      footerWavePinkLower={footerWavePinkLower}
+    />
   </WrapLayout>
 );
