@@ -12,12 +12,11 @@ ${rh.forPortraitTabletUp`padding: 40px 40px 0 40px;`}
   align-items: center;
   justify-content: space-between;
   width: 100vw;
-  font-family:"Poppins";
+
 `;
 
 const ButtonConnect = Styled.a`
 ${rh.forPortraitTabletUp`font-size: 18px;`}
-font-family: "Poppins";
 font-weight:600;
 text-decoration: none;
 margin-left: 15px;
@@ -29,7 +28,7 @@ border-radius: 10px;`;
 
 const ButtonCreateAccount = Styled.a`
 ${rh.forPortraitTabletUp`font-size: 18px;`}
-font-family: "Poppins";
+
 font-weight:600;
 text-decoration: none;
 margin-left: 15px;

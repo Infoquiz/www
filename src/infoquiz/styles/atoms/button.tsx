@@ -14,7 +14,7 @@ const ButtonBasic = Styled.a`
    background-color: ${Color.pink};
    padding: 10px 20px;
    border-radius: 10px;
-   font-family: "Poppins";
+
    font-weight:600;
    cursor:pointer;
    ${rh.forMobileUp`

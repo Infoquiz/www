@@ -11,6 +11,8 @@ const WrapLayout = Styled.div`
   justify-content: space-between;
   align-items: center;
   background-color:${Color.lightGrey};
+  font-family: "Poppins";
+
 `;
 
 export const Layout = ({

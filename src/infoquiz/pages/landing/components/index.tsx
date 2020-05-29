@@ -35,14 +35,12 @@ const WelcomeTextes = Styled.div`
   `;
 const WelcomeTitle = Styled.div`
     margin-top: 20px;
-    font-family: "Poppins";
     font-weight:600;
 ${rh.forPortraitTabletUp`   font-size: 18px;`} 
 ${rh.forLandscapeTabletUp` font-size: 22px;`} 
    `;
 
 const WelcomeTexte = Styled.div`
-font-family:"Poppins";
  text-align: left;
     line-height: 18px;
     font-size: 12px;
@@ -77,7 +75,6 @@ const LandingEmoji = Styled.div`
      & > p {
       margin-top: 5px;
        text-align: center;
-       font-family: "Poppins";
        font-weight:300;
        font-size: 12px;
   ${rh.forPortraitTabletUp`font-size: 18px;

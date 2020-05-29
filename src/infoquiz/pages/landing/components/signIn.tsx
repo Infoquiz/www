@@ -1,32 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-
+import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { Layout } from "infoquiz/styles/layout";
+import { Logo } from "infoquiz/styles/atoms/logo";
 import { Button } from "infoquiz/styles/atoms/button";
 
 const Form = styled.form`
-  & > a {
-    @include medium {
-      font-size: 12px;
-    }
-    font-size: 10px;
-    color: black;
-    text-decoration: none;
-    text-decoration: underline;
-  }
   display: flex;
   flex-direction: column;
-  &__center {
-    @include medium {
-      display: flex;
-    }
-  }
-  &__right {
-    @include medium {
-      padding-left: 80px;
-    }
-  }
   margin-bottom: 15px;
+  align-items: center;
 `;
 
 const LabelItems = styled.div`
@@ -47,31 +30,34 @@ const LabelItems = styled.div`
     }
   }
   & > label {
-    @include medium {
-      font-size: 18px;
-    }
+    ${rh.forPortraitTabletUp`font-size: 18px;`};
     font-size: 14px;
   }
+`;
+const NotAccountTexte = styled.a`
+  ${rh.forPortraitTabletUp`font-size: 14px;`};
+  font-size: 12px;
+  color: black;
+  text-decoration: underline;
 `;
 
 export const SignIn = () => {
   return (
     <Layout headerArrowBackHome>
       <Form>
+        <Logo />
         <div>
-          <p>
-            infoqui<span>z</span>
-          </p>
+          <LabelItems>
+            <label htmlFor="email">Ton mail :</label>
+            <input type="email" placeholder="Mail" name="email" />
+          </LabelItems>
+          <LabelItems>
+            <label htmlFor="password">Ton mot de passe :</label>
+            <input type="password" placeholder="Mot de passe" name="password" />
+            <NotAccountTexte href="/">Pas encore de compte ?</NotAccountTexte>
+          </LabelItems>
         </div>
-        <LabelItems>
-          <label htmlFor="email">Ton mail :</label>
-          <input type="email" placeholder="Mail" name="email" />
-        </LabelItems>
-        <LabelItems>
-          <label htmlFor="password">Ton mot de passe :</label>
-          <input type="password" placeholder="Mot de passe" name="password" />
-        </LabelItems>
-        <a href="">Pas encore de compte ?</a>
+
         <Button>Se connecter</Button>
       </Form>
     </Layout>
