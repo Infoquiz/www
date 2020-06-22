@@ -2,19 +2,19 @@ import { css } from "styled-components";
 
 const device = {
   mobile: 480,
-  portraitTablet: 768,
-  landscapeTablet: 1024,
+  Tablet: 768,
+  LittleDesktop: 1024,
   desktop: 1200,
 };
 
 type ResponsiveHelpersKeys =
   | "forMobileUp"
-  | "forPortraitTabletUp"
-  | "forLandscapeTabletUp"
+  | "forTabletUp"
+  | "forLittleDesktopUp"
   | "forDesktopUp"
   | "belowMobile"
-  | "belowPortraitTablet"
-  | "belowLandscapeTablet"
+  | "belowTablet"
+  | "belowLittleDesktop"
   | "belowDesktop";
 
 type ResponsiveHelpers = Record<

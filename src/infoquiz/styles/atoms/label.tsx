@@ -20,8 +20,8 @@ const Wrap = Styled.div`
     }
   }
   & > label {
-    ${rh.forPortraitTabletUp`font-size: 18px;`};
     font-size: 14px;
+    ${rh.forTabletUp`font-size: 18px;`};
   }
   `;
 

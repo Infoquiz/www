@@ -1,25 +1,30 @@
 import React from "react";
+import styled from "styled-components";
+import { responsiveHelpers as rh } from "infoquiz/styles/utils";
+
 import { Layout } from "infoquiz/styles/layout";
 import { Logo } from "infoquiz/styles/atoms/logo";
 import { Label } from "infoquiz/styles/atoms/label";
-import styled from "styled-components";
 import { Button } from "infoquiz/styles/atoms/button";
-import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 
 const SignUpWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
+
 const LabelWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: 10px 0 10px 0;
   padding: 15px;
-  ${rh.forPortraitTabletUp`  flex-direction: row;   margin: 60px 0 30px 0;
+  ${rh.forTabletUp`  
+  flex-direction: row;   
+  margin: 60px 0 30px 0;
 `};
 `;
+
 export const SignUp = () => {
   return (
     <Layout headerArrowBackHome footerWavePinkLower>

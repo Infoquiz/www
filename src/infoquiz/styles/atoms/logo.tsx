@@ -4,15 +4,16 @@ import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { Color } from "infoquiz/styles/consts";
 
 const LogoInfoquiz = Styled.div`
- ${rh.forPortraitTabletUp`font-size: 28px;`}
   font-weight:800;
   font-size: 22px;
-  & > p {
+ ${rh.forTabletUp`font-size: 28px;`}
+ & > p {
     & > span{ 
       color: ${Color.pink}
-  } 
-}
+    } 
+   }
 `;
+
 export const Logo = () => {
   return (
     <LogoInfoquiz>

@@ -9,23 +9,22 @@ const ButtonBasic = Styled.div`
    border:none;
    text-align: center;
    margin: 20px;
-
+   color:${Color.lightGrey};
    background-color: ${Color.pink};
    padding: 10px 20px;
    border-radius: 10px;
-
    font-weight:600;
    cursor:pointer;
-   ${rh.forMobileUp`
-       width: 280px;
-  padding: 15px 27px;
-  font-size: 16px;`};
-     ${rh.forPortraitTabletUp`font-size: 18px;`} 
-     &>a{
-   text-decoration: none;
+   &>a{
+      text-decoration: none;
       color:${Color.lightGrey} ;
      }
-  `;
+   ${rh.forMobileUp`
+    width: 280px;
+    padding: 15px 27px;
+    font-size: 16px;`};
+    ${rh.forTabletUp`font-size: 18px;`} 
+`;
 
 export const Button = ({ children }) => {
   return <ButtonBasic>{children}</ButtonBasic>;

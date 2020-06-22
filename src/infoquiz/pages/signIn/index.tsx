@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
+
 import { Layout } from "infoquiz/styles/layout";
 import { Logo } from "infoquiz/styles/atoms/logo";
 import { Button } from "infoquiz/styles/atoms/button";
@@ -18,13 +19,14 @@ const LoginWrap = styled.div`
     width: 250px;
   }
   margin: 30px;
-  ${rh.forPortraitTabletUp`flex-direction:row;  width:100%; 
-  
-    & > img {
-    
-    width: 330px;
+  ${rh.forTabletUp`
+  flex-direction:row;  
+  width:100%; 
+  & > img {
+  width: 330px;
   }`};
 `;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -33,14 +35,14 @@ const Form = styled.form`
   & > a {
     width: 100%;
   }
-  ${rh.forPortraitTabletUp`width:300px; margin:50px;`};
+  ${rh.forTabletUp`width:300px; margin:50px;`};
 `;
 
 const NotAccountTexte = styled.a`
-  ${rh.forPortraitTabletUp`font-size: 14px;`};
   font-size: 12px;
   color: black;
   text-decoration: underline;
+  ${rh.forTabletUp`font-size: 14px;`};
 `;
 
 export const SignIn = () => {
@@ -66,7 +68,6 @@ export const SignIn = () => {
           </div>
           <Button>Se connecter</Button>
         </Form>
-
         <img src={LoginImage} alt="" />
       </LoginWrap>
     </Layout>
