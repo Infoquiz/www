@@ -112,7 +112,9 @@ export const Landing = () => {
         </div>
       </LandingEmoji>
 
-      <Button>C'est parti !</Button>
+      <Button>
+        <a href="/levelchoice">C'est parti !</a>
+      </Button>
     </Layout>
   );
 };

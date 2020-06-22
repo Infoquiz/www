@@ -22,6 +22,7 @@ export const Layout = ({
   headerArrowBackHome = false,
   footerWaveBlue = false,
   footerWavePinkLower = false,
+  footerWavePinkHigh = false,
 }: {
   children: any;
   headerUserNotLogged?: boolean;
@@ -29,6 +30,7 @@ export const Layout = ({
   headerArrowBackHome?: boolean;
   footerWaveBlue?: boolean;
   footerWavePinkLower?: boolean;
+  footerWavePinkHigh?: boolean;
 }) => (
   <WrapLayout>
     <Header
@@ -40,6 +42,7 @@ export const Layout = ({
     <Footer
       footerWaveBlue={footerWaveBlue}
       footerWavePinkLower={footerWavePinkLower}
+      footerWavePinkHigh={footerWavePinkHigh}
     />
   </WrapLayout>
 );

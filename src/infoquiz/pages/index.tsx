@@ -4,6 +4,7 @@ import { createBrowserHistory as createHistory } from "history";
 import { Landing } from "./landing";
 import { SignIn } from "./signIn";
 import { SignUp } from "./signUp";
+import { LevelChoice } from "./level-choice";
 
 export const AppLanding = () => {
   const history = createHistory();
@@ -13,6 +14,7 @@ export const AppLanding = () => {
         <Route exact path="/" component={Landing} />
         <Route exact path="/signIn" component={SignIn} />
         <Route exact path="/signUp" component={SignUp} />
+        <Route exact path="/levelChoice" component={LevelChoice} />
       </Switch>
     </Router>
   );
