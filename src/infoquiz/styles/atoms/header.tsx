@@ -83,12 +83,12 @@ const HeaderArrowBackHome = () => (
   </WrapHeader>
 );
 
-const HeaderLevel = () => (
+const HeaderLevel = ({ level }) => (
   <WrapHeader>
     <a href="/">
       <ArrowBackHome src={arrowBackHomeImage} alt="flèche" />
     </a>
-    <Level>DEBUTANT</Level>
+    <Level>{level}</Level>
   </WrapHeader>
 );
 
@@ -97,13 +97,15 @@ export const Header = ({
   headerUserLogged,
   headerArrowBackHome,
   headerLevel,
+  level,
 }: {
   headerUserNotLogged: boolean;
   headerUserLogged: boolean;
   headerArrowBackHome: boolean;
   headerLevel: boolean;
+  level: string;
 }): JSX.Element => {
-  const handleHeader = () => {
+  const handleHeader = (level) => {
     if (headerUserNotLogged) {
       return <HeaderUserNotLogged />;
     } else if (headerArrowBackHome) {
@@ -111,9 +113,9 @@ export const Header = ({
     } else if (headerUserLogged) {
       return <HeaderUserLogged />;
     } else if (headerLevel) {
-      return <HeaderLevel />;
+      return <HeaderLevel level={level} />;
     }
   };
 
-  return <div>{handleHeader()}</div>;
+  return <div>{handleHeader(level)}</div>;
 };

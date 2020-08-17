@@ -17,7 +17,7 @@ export const AppLanding = () => {
         <Route exact path="/signIn" component={SignIn} />
         <Route exact path="/signUp" component={SignUp} />
         <Route exact path="/levelChoice" component={LevelChoice} />
-        <Route exact path="/level" component={Level} />
+        <Route exact path="/level/:level" component={Level} />
       </Switch>
     </Router>
   );

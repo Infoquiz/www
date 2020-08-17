@@ -26,6 +26,12 @@ const ButtonBasic = Styled.div`
     ${rh.forTabletUp`font-size: 18px;`} 
 `;
 
-export const Button = ({ children }) => {
-  return <ButtonBasic>{children}</ButtonBasic>;
+export const Button = ({
+  onClick,
+  children,
+}: {
+  onClick?: () => any;
+  children: any;
+}) => {
+  return <ButtonBasic onClick={onClick}>{children}</ButtonBasic>;
 };

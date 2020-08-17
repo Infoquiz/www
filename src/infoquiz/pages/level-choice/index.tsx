@@ -57,15 +57,15 @@ export const LevelChoice = () => {
         <Text>Sélectionne ton niveau :</Text>
         <LevelWrap>
           <Level>
-            <a href="./level">DEBUTANT</a>
+            <a href="/level/beginner">DEBUTANT</a>
             <img src={lock} alt="lock" />
           </Level>
           <Level>
-            <a href="./level">INTERMEDIARE</a>
+            <a href="/level/intermediate">INTERMEDIARE</a>
             <img src={lock} alt="lock" />
           </Level>
           <Level>
-            <a href="./level">EXPERT</a>
+            <a href="/level/expert">EXPERT</a>
             <img src={lock} alt="lock" />
           </Level>
         </LevelWrap>

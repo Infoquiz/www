@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { Color } from "infoquiz/styles/consts";
 
 import { Layout } from "infoquiz/styles/layout";
 import { Button } from "infoquiz/styles/atoms/button";
+
+import { GetQuestionApi } from "infoquiz/services";
 
 const Wrap = styled.div`
   display: flex;
@@ -53,38 +56,54 @@ const Answers = styled.div`
 `;
 
 export const Level = () => {
-  return (
+  let { level } = useParams();
+
+  const LEVEL_MAP = {
+    beginner: "DEBUTANT",
+    intermediate: "INTERMEDIAIRE",
+    expert: "EXPERT",
+  };
+
+  const [questions, setQuestions] = useState<Record<string, any>[] | null>(
+    null
+  );
+
+  const [questionIndex, setQuestionindex] = useState(0);
+  useEffect(() => {
+    GetQuestionApi(level).then((resp) => {
+      setQuestions(resp);
+    });
+  }, [level]);
+
+  return questions ? (
+    <Layout headerLevel footerWavePinkZigzag level={LEVEL_MAP[level]}>
+      <Wrap>
+        {questions.map((question, index) => {
+          return index === questionIndex ? (
+            <React.Fragment key={index}>
+              <Question>{question.question}</Question>
+              <Answers>
+                {question.answers.map((answer, index) => (
+                  <React.Fragment key={index}>
+                    <Answer key={index}>
+                      <input type="radio"></input>
+                      <label>{answer.answer}</label>
+                    </Answer>
+                  </React.Fragment>
+                ))}
+              </Answers>
+            </React.Fragment>
+          ) : null;
+        })}
+        <Button onClick={() => setQuestionindex(questionIndex + 1)}>
+          Question suivante
+        </Button>
+      </Wrap>
+    </Layout>
+  ) : (
     <Layout headerLevel footerWavePinkZigzag>
       <Wrap>
-        <Question>En quelle année a été crée internet ?</Question>
-        <Answers>
-          <Answer>
-            <input type="radio"></input>
-            <label>1930 </label>
-          </Answer>
-          <Answer>
-            <input type="radio"></input>
-            <label>1728 </label>
-          </Answer>
-          <Answer>
-            <input type="radio"></input>
-            <label>1907 </label>
-          </Answer>
-          <Answer>
-            <input type="radio"></input>
-            <label>1983 </label>
-          </Answer>
-          <Answer>
-            <input type="radio"></input>
-            <label>1929 </label>
-          </Answer>
-          <Answer>
-            <input type="radio"></input>
-            <label>1950 </label>
-          </Answer>
-        </Answers>
-
-        <Button>Question suivante</Button>
+        <div>Loading</div>
       </Wrap>
     </Layout>
   );

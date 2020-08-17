@@ -25,6 +25,7 @@ export const Layout = ({
   footerWavePinkLower = false,
   footerWavePinkHigh = false,
   footerWavePinkZigzag = false,
+  level = "",
 }: {
   children: any;
   headerUserNotLogged?: boolean;
@@ -35,6 +36,7 @@ export const Layout = ({
   footerWavePinkLower?: boolean;
   footerWavePinkHigh?: boolean;
   footerWavePinkZigzag?: boolean;
+  level?: string;
 }) => (
   <WrapLayout>
     <Header
@@ -42,6 +44,7 @@ export const Layout = ({
       headerUserLogged={headerUserLogged}
       headerArrowBackHome={headerArrowBackHome}
       headerLevel={headerLevel}
+      level={level}
     />
     {children}
     <Footer
