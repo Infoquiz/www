@@ -4,4 +4,17 @@ const GetQuestionApi = (level) => {
   );
 };
 
-export { GetQuestionApi };
+const CreateAccount = (formData) => {
+  const payload = JSON.stringify( formData );
+  console.log(payload)
+  return fetch(`http://localhost:8000/account`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: payload,
+  });
+};
+
+export { GetQuestionApi, CreateAccount };

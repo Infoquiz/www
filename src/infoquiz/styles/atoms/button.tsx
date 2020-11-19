@@ -30,7 +30,7 @@ export const Button = ({
   onClick,
   children,
 }: {
-  onClick?: () => any;
+  onClick?: any;
   children: any;
 }) => {
   return <ButtonBasic onClick={onClick}>{children}</ButtonBasic>;
