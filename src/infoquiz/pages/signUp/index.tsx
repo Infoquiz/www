@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 
@@ -35,7 +35,7 @@ export const SignUp = () => {
     password: "",
   };
 
-  const [formData, updateFormData] = React.useState(initialFormData);
+  const [formData, updateFormData] = useState(initialFormData);
   const handleChange = (e) => {
     updateFormData({
       ...formData,
@@ -44,9 +44,7 @@ export const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("form",formData);
+  const handleSubmit = () => {
     CreateAccount(formData);
   };
 
