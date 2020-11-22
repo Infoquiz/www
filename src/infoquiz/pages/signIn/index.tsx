@@ -64,9 +64,7 @@ export const SignIn = () => {
 
   const SignInApi = () => {
     Login(formData).then((resp) => {
-      if (resp) {
-        alert("toto");
-      }
+      console.log(resp);
     });
   };
 
