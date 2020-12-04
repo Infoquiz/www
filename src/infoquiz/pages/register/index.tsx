@@ -28,7 +28,7 @@ const LabelWrap = styled.div`
 `};
 `;
 
-export const SignUp = () => {
+export const Register = () => {
   const history = useHistory();
   const initialFormData = {
     username: "",
@@ -48,7 +48,7 @@ export const SignUp = () => {
 
   const handleSubmit = () => {
     CreateAccount(formData);
-    history.push("/signIn");
+    history.push("/login");
   };
 
   return (
@@ -82,7 +82,7 @@ export const SignUp = () => {
           </div>
           <div>
             <Label>
-              <label>Ton mot de passe  :</label>
+              <label>Ton mot de passe :</label>
               <input
                 type="password"
                 placeholder="Mot de passe"

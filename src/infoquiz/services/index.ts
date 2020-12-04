@@ -18,9 +18,9 @@ const CreateAccount = (formData) => {
   });
 };
 
-const Login = async (formData): Promise<any> => {
+const LoginService = async (formData): Promise<any> => {
   const payload = JSON.stringify(formData);
   return await post("http://localhost:8000/account/login", payload);
 };
 
-export { GetQuestionApi, CreateAccount, Login };
+export { GetQuestionApi, CreateAccount, LoginService };

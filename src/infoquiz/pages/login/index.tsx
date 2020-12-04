@@ -8,7 +8,7 @@ import { Logo } from "infoquiz/styles/atoms/logo";
 import { Button } from "infoquiz/styles/atoms/button";
 import { Label } from "infoquiz/styles/atoms/label";
 
-import { Login } from "infoquiz/services";
+import { LoginService } from "infoquiz/services";
 
 import LoginImage from "infoquiz/assets/img/illustrationBoy-login.png";
 
@@ -48,7 +48,7 @@ const NotAccountTexte = styled.a`
   ${rh.forTabletUp`font-size: 14px;`};
 `;
 
-export const SignIn = () => {
+export const Login = () => {
   const history = useHistory();
   const initialFormData = {
     email: "",
@@ -65,7 +65,7 @@ export const SignIn = () => {
   };
 
   const SignInApi = () => {
-    Login(formData).then(
+    LoginService(formData).then(
       (resp) => {
         localStorage.setItem("token", resp.accessToken);
         history.push("/");
