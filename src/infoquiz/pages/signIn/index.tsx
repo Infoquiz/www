@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
+import { useHistory } from "react-router-dom";
 
 import { Layout } from "infoquiz/styles/layout";
 import { Logo } from "infoquiz/styles/atoms/logo";
@@ -48,6 +49,7 @@ const NotAccountTexte = styled.a`
 `;
 
 export const SignIn = () => {
+  const history = useHistory();
   const initialFormData = {
     email: "",
     password: "",
@@ -63,9 +65,13 @@ export const SignIn = () => {
   };
 
   const SignInApi = () => {
-    Login(formData).then((resp) => {
-      console.log(resp);
-    });
+    Login(formData).then(
+      (resp) => {
+        localStorage.setItem("token", resp.accessToken);
+        history.push("/");
+      },
+      () => console.log("error")
+    );
   };
 
   return (
@@ -89,6 +95,7 @@ export const SignIn = () => {
                 type="password"
                 placeholder="Mot de passe"
                 name="password"
+                onChange={handleChange}
               />
               <NotAccountTexte href="/">Pas encore de compte ?</NotAccountTexte>
             </Label>

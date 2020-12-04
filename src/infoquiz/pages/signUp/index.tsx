@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
+import { useHistory } from "react-router-dom";
 
 import { Layout } from "infoquiz/styles/layout";
 import { Logo } from "infoquiz/styles/atoms/logo";
@@ -28,6 +29,7 @@ const LabelWrap = styled.div`
 `;
 
 export const SignUp = () => {
+  const history = useHistory();
   const initialFormData = {
     username: "",
     email: "",
@@ -46,6 +48,7 @@ export const SignUp = () => {
 
   const handleSubmit = () => {
     CreateAccount(formData);
+    history.push("/signIn");
   };
 
   return (

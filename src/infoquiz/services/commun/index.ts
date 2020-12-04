@@ -1,11 +1,3 @@
-// const readResponse = (response) => {
-//   if (response.status === 404) {
-//     response.then((r) => Promise.reject(r));
-//   } else {
-//     return response.then((r) => r.json());
-//   }
-// };
-
 const readResponse = <T>(): ((call) => Promise<T>) => (call) => {
   const _doCall = <T>(call): Promise<T> =>
     call().then((response) => {
