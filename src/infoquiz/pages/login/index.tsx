@@ -10,7 +10,7 @@ import { Label } from "infoquiz/styles/atoms/label";
 
 import { LoginService } from "./services";
 
-import LoginImage from "infoquiz/assets/img/illustrationBoy-login.png";
+import LoginImage from "infoquiz/assets/illustrations/illustrationBoy-login.png";
 
 const LoginWrap = styled.div`
   justify-content: center;

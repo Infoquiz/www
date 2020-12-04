@@ -5,10 +5,10 @@ import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { Button } from "infoquiz/styles/atoms/button";
 import { Layout } from "infoquiz/styles/layout";
 
-import computer from "infoquiz/assets/img/illustrationGo-landing.png";
-import brain from "infoquiz/assets/img/brain-landingIcon.png";
-import emoji from "infoquiz/assets/img/emoji-landingIcon.png";
-import friends from "infoquiz/assets/img/friends-landingIcon.png";
+import computer from "infoquiz/assets/illustrations/illustrationGo-landing.png";
+import brain from "infoquiz/assets/pictos/brain-landingIcon.png";
+import emoji from "infoquiz/assets/pictos/emoji-landingIcon.png";
+import friends from "infoquiz/assets/pictos/friends-landingIcon.png";
 
 const LandingWelcome = Styled.div`
   text-align: left;

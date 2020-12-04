@@ -5,7 +5,7 @@ import { Color } from "infoquiz/styles/consts";
 
 import { Logo } from "infoquiz/styles/atoms/logo";
 
-import arrowBackHomeImage from "infoquiz/assets/img/arrow-left.svg";
+import arrowBackHomeImage from "infoquiz/assets/pictos/arrow-left.svg";
 
 const WrapHeader = Styled.div`
   padding: 20px 20px 0 20px;
