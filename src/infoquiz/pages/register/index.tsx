@@ -8,7 +8,7 @@ import { Logo } from "infoquiz/styles/atoms/logo";
 import { Label } from "infoquiz/styles/atoms/label";
 import { Button } from "infoquiz/styles/atoms/button";
 
-import { CreateAccount } from "infoquiz/services";
+import { CreateAccount } from "./services";
 
 const SignUpWrap = styled.div`
   display: flex;
