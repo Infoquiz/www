@@ -28,27 +28,27 @@ const LabelWrap = styled.div`
 `};
 `;
 
-export const SignUp = () => {
+export const Register = () => {
   const history = useHistory();
-  const initialFormData = {
+  const initial_form_data = {
     username: "",
     email: "",
     datebirth: "",
     password: "",
   };
 
-  const [formData, updateFormData] = useState(initialFormData);
+  const [form_data, updateFormData] = useState(initial_form_data);
   const handleChange = (e) => {
     updateFormData({
-      ...formData,
+      ...form_data,
 
       [e.target.name]: e.target.value.trim(),
     });
   };
 
   const handleSubmit = () => {
-    CreateAccount(formData);
-    history.push("/signIn");
+    CreateAccount(form_data);
+    history.push("/login");
   };
 
   return (
@@ -82,7 +82,7 @@ export const SignUp = () => {
           </div>
           <div>
             <Label>
-              <label>Ton mot de passe  :</label>
+              <label>Ton mot de passe :</label>
               <input
                 type="password"
                 placeholder="Mot de passe"
