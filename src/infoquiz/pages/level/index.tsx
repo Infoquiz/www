@@ -7,7 +7,7 @@ import { Color } from "infoquiz/styles/consts";
 import { Layout } from "infoquiz/styles/layout";
 import { Button } from "infoquiz/styles/atoms/button";
 
-import { GetQuestionApi } from "infoquiz/services";
+import { GetQuestionApi } from "./services";
 
 const Wrap = styled.div`
   display: flex;

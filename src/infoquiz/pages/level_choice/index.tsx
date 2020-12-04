@@ -6,7 +6,7 @@ import { Color } from "infoquiz/styles/consts";
 import { Layout } from "infoquiz/styles/layout";
 import { Logo } from "infoquiz/styles/atoms/logo";
 
-import lock from "infoquiz/assets/img/lock-open.svg";
+import lock from "infoquiz/assets/pictos/lock-open.svg";
 
 const Text = styled.p`
   font-size: 16px;

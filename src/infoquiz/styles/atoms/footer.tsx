@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Styled from "styled-components";
 
-import waveBlue from "infoquiz/assets/img/wave-landing.svg";
-import wavePinkLower from "infoquiz/assets/img/wave-register.svg";
-import wavePinkHigh from "infoquiz/assets/img/wave-choice.svg";
-import wavePinkZigzag from "infoquiz/assets/img/wave-beginner.svg";
+import waveBlue from "infoquiz/assets/illustrations/wave-landing.svg";
+import wavePinkLower from "infoquiz/assets/illustrations/wave-register.svg";
+import wavePinkHigh from "infoquiz/assets/illustrations/wave-choice.svg";
+import wavePinkZigzag from "infoquiz/assets/illustrations/wave-beginner.svg";
 
 const Wave = Styled.div`
   display: flex;
