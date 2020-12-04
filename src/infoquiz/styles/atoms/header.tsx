@@ -62,8 +62,10 @@ const HeaderUserNotLogged = () => (
   <WrapHeader>
     <Logo />
     <div>
-      <ButtonConnect href="/signIn">Se connecter</ButtonConnect>
-      <ButtonCreateAccount href="/signUp">Créer un compte</ButtonCreateAccount>
+      <ButtonConnect href="/login">Se connecter</ButtonConnect>
+      <ButtonCreateAccount href="/register">
+        Créer un compte
+      </ButtonCreateAccount>
     </div>
   </WrapHeader>
 );

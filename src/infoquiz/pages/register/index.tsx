@@ -30,24 +30,24 @@ const LabelWrap = styled.div`
 
 export const Register = () => {
   const history = useHistory();
-  const initialFormData = {
+  const initial_form_data = {
     username: "",
     email: "",
     datebirth: "",
     password: "",
   };
 
-  const [formData, updateFormData] = useState(initialFormData);
+  const [form_data, updateFormData] = useState(initial_form_data);
   const handleChange = (e) => {
     updateFormData({
-      ...formData,
+      ...form_data,
 
       [e.target.name]: e.target.value.trim(),
     });
   };
 
   const handleSubmit = () => {
-    CreateAccount(formData);
+    CreateAccount(form_data);
     history.push("/login");
   };
 

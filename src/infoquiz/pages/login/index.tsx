@@ -55,17 +55,17 @@ export const Login = () => {
     password: "",
   };
 
-  const [formData, updateFormData] = useState(initialFormData);
+  const [form_data, updateFormData] = useState(initialFormData);
   const handleChange = (e) => {
     updateFormData({
-      ...formData,
+      ...form_data,
 
       [e.target.name]: e.target.value.trim(),
     });
   };
 
   const SignInApi = () => {
-    LoginService(formData).then(
+    LoginService(form_data).then(
       (resp) => {
         localStorage.setItem("token", resp.accessToken);
         history.push("/");

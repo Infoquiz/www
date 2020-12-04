@@ -68,7 +68,7 @@ export const Level = () => {
     null
   );
 
-  const [questionIndex, setQuestionindex] = useState(0);
+  const [question_index, setQuestionindex] = useState(0);
   useEffect(() => {
     GetQuestionApi(level).then((resp) => {
       setQuestions(resp);
@@ -79,7 +79,7 @@ export const Level = () => {
     <Layout headerLevel footerWavePinkZigzag level={LEVEL_MAP[level]}>
       <Wrap>
         {questions.map((question, index) => {
-          return index === questionIndex ? (
+          return index === question_index ? (
             <React.Fragment key={index}>
               <Question>{question.question}</Question>
               <Answers>
@@ -95,7 +95,7 @@ export const Level = () => {
             </React.Fragment>
           ) : null;
         })}
-        <Button onClick={() => setQuestionindex(questionIndex + 1)}>
+        <Button onClick={() => setQuestionindex(question_index + 1)}>
           Question suivante
         </Button>
       </Wrap>
