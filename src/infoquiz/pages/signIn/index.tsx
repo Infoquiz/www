@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
+import { useHistory } from "react-router-dom";
 
 import { Layout } from "infoquiz/styles/layout";
 import { Logo } from "infoquiz/styles/atoms/logo";
 import { Button } from "infoquiz/styles/atoms/button";
 import { Label } from "infoquiz/styles/atoms/label";
+
+import { Login } from "infoquiz/services";
 
 import LoginImage from "infoquiz/assets/img/illustrationBoy-login.png";
 
@@ -46,6 +49,31 @@ const NotAccountTexte = styled.a`
 `;
 
 export const SignIn = () => {
+  const history = useHistory();
+  const initialFormData = {
+    email: "",
+    password: "",
+  };
+
+  const [formData, updateFormData] = useState(initialFormData);
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
+  const SignInApi = () => {
+    Login(formData).then(
+      (resp) => {
+        localStorage.setItem("token", resp.accessToken);
+        history.push("/");
+      },
+      () => console.log("error")
+    );
+  };
+
   return (
     <Layout headerArrowBackHome footerWavePinkLower>
       <LoginWrap>
@@ -54,7 +82,12 @@ export const SignIn = () => {
           <div>
             <Label>
               <label htmlFor="email">Ton mail :</label>
-              <input type="email" placeholder="Mail" name="email" />
+              <input
+                type="email"
+                placeholder="Mail"
+                name="email"
+                onChange={handleChange}
+              />
             </Label>
             <Label>
               <label htmlFor="password">Ton mot de passe :</label>
@@ -62,11 +95,12 @@ export const SignIn = () => {
                 type="password"
                 placeholder="Mot de passe"
                 name="password"
+                onChange={handleChange}
               />
               <NotAccountTexte href="/">Pas encore de compte ?</NotAccountTexte>
             </Label>
           </div>
-          <Button>Se connecter</Button>
+          <Button onClick={SignInApi}>Se connecter</Button>
         </Form>
         <img src={LoginImage} alt="" />
       </LoginWrap>

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
+import { useHistory } from "react-router-dom";
 
 import { Layout } from "infoquiz/styles/layout";
 import { Logo } from "infoquiz/styles/atoms/logo";
 import { Label } from "infoquiz/styles/atoms/label";
 import { Button } from "infoquiz/styles/atoms/button";
+
+import { CreateAccount } from "infoquiz/services";
 
 const SignUpWrap = styled.div`
   display: flex;
@@ -19,13 +22,35 @@ const LabelWrap = styled.div`
   justify-content: space-between;
   margin: 10px 0 10px 0;
   padding: 15px;
-  ${rh.forTabletUp`  
-  flex-direction: row;   
+  ${rh.forTabletUp`
+  flex-direction: row;
   margin: 60px 0 30px 0;
 `};
 `;
 
 export const SignUp = () => {
+  const history = useHistory();
+  const initialFormData = {
+    username: "",
+    email: "",
+    datebirth: "",
+    password: "",
+  };
+
+  const [formData, updateFormData] = useState(initialFormData);
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
+  const handleSubmit = () => {
+    CreateAccount(formData);
+    history.push("/signIn");
+  };
+
   return (
     <Layout headerArrowBackHome footerWavePinkLower>
       <SignUpWrap>
@@ -34,7 +59,12 @@ export const SignUp = () => {
           <div>
             <Label>
               <label>Ton prénom :</label>
-              <input type="name" placeholder="Ton prénom" name="name"></input>
+              <input
+                type="name"
+                placeholder="Ton prénom"
+                name="username"
+                onChange={handleChange}
+              />
             </Label>
             <Label>
               <label>Ton mail :</label>
@@ -42,11 +72,12 @@ export const SignUp = () => {
                 type="email"
                 placeholder="exemple@blabla.com"
                 name="email"
-              ></input>
+                onChange={handleChange}
+              />
             </Label>
             <Label>
               <label>Ta date de naissance :</label>
-              <input type="date" name="datebirth"></input>
+              <input type="date" name="datebirth" onChange={handleChange} />
             </Label>
           </div>
           <div>
@@ -56,7 +87,8 @@ export const SignUp = () => {
                 type="password"
                 placeholder="Mot de passe"
                 name="password"
-              ></input>
+                onChange={handleChange}
+              />
             </Label>
             <Label>
               <label>Confirme ton mot de passe :</label>
@@ -64,11 +96,12 @@ export const SignUp = () => {
                 type="password"
                 placeholder="Mot de passe"
                 name="confirmpassword"
-              ></input>
+                onChange={handleChange}
+              />
             </Label>
           </div>
         </LabelWrap>
-        <Button>Créer mon compte</Button>
+        <Button onClick={handleSubmit}>Créer mon compte</Button>
       </SignUpWrap>
     </Layout>
   );

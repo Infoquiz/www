@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 
@@ -88,6 +88,10 @@ const LandingEmoji = Styled.div`
    }`;
 
 export const Landing = () => {
+  useEffect(() => {
+    console.log(localStorage.getItem("token"));
+  }, []);
+
   return (
     <Layout headerUserNotLogged footerWaveBlue>
       <LandingWelcome>
