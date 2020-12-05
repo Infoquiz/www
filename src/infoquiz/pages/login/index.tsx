@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
 
 import { Layout } from "infoquiz/styles/layout";
 import { Logo } from "infoquiz/styles/atoms/logo";
@@ -50,34 +51,27 @@ const NotAccountTexte = styled.a`
 
 export const Login = () => {
   const history = useHistory();
-  const initialFormData = {
-    email: "",
-    password: "",
-  };
 
-  const [form_data, updateFormData] = useState(initialFormData);
-  const handleChange = (e) => {
-    updateFormData({
-      ...form_data,
-
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-
-  const SignInApi = () => {
-    LoginService(form_data).then(
-      (resp) => {
-        localStorage.setItem("token", resp.accessToken);
-        history.push("/");
-      },
-      () => console.log("error")
-    );
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      LoginService(values).then(
+        (resp) => {
+          localStorage.setItem("token", resp.accessToken);
+          history.push("/");
+        },
+        () => console.log("error")
+      );
+    },
+  });
 
   return (
     <Layout headerArrowBackHome footerWavePinkLower>
       <LoginWrap>
-        <Form>
+        <Form onSubmit={formik.handleSubmit}>
           <Logo />
           <div>
             <Label>
@@ -86,7 +80,7 @@ export const Login = () => {
                 type="email"
                 placeholder="Mail"
                 name="email"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
             </Label>
             <Label>
@@ -95,12 +89,14 @@ export const Login = () => {
                 type="password"
                 placeholder="Mot de passe"
                 name="password"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
-              <NotAccountTexte href="/">Pas encore de compte ?</NotAccountTexte>
+              <NotAccountTexte href="/register">
+                Pas encore de compte ?
+              </NotAccountTexte>
             </Label>
           </div>
-          <Button onClick={SignInApi}>Se connecter</Button>
+          <Button type="submit">Se connecter</Button>
         </Form>
         <img src={LoginImage} alt="" />
       </LoginWrap>
