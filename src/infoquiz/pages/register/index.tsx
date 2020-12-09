@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
 
 import { Layout } from "infoquiz/styles/layout";
 import { Logo } from "infoquiz/styles/atoms/logo";
@@ -10,7 +11,7 @@ import { Button } from "infoquiz/styles/atoms/button";
 
 import { CreateAccount } from "./services";
 
-const SignUpWrap = styled.div`
+const SignUpWrap = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,30 +31,26 @@ const LabelWrap = styled.div`
 
 export const Register = () => {
   const history = useHistory();
-  const initial_form_data = {
-    username: "",
-    email: "",
-    datebirth: "",
-    password: "",
-  };
 
-  const [form_data, updateFormData] = useState(initial_form_data);
-  const handleChange = (e) => {
-    updateFormData({
-      ...form_data,
-
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-
-  const handleSubmit = () => {
-    CreateAccount(form_data);
-    history.push("/login");
-  };
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      datebirth: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      CreateAccount(values).then(
+        (d) => console.log("s", d),
+        () => console.log("error")
+      );
+      history.push("/");
+    },
+  });
 
   return (
     <Layout headerArrowBackHome footerWavePinkLower>
-      <SignUpWrap>
+      <SignUpWrap onSubmit={formik.handleSubmit}>
         <Logo />
         <LabelWrap>
           <div>
@@ -63,7 +60,7 @@ export const Register = () => {
                 type="name"
                 placeholder="Ton prénom"
                 name="username"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
             </Label>
             <Label>
@@ -72,12 +69,16 @@ export const Register = () => {
                 type="email"
                 placeholder="exemple@blabla.com"
                 name="email"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
             </Label>
             <Label>
               <label>Ta date de naissance :</label>
-              <input type="date" name="datebirth" onChange={handleChange} />
+              <input
+                type="date"
+                name="datebirth"
+                onChange={formik.handleChange}
+              />
             </Label>
           </div>
           <div>
@@ -87,7 +88,7 @@ export const Register = () => {
                 type="password"
                 placeholder="Mot de passe"
                 name="password"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
             </Label>
             <Label>
@@ -96,12 +97,12 @@ export const Register = () => {
                 type="password"
                 placeholder="Mot de passe"
                 name="confirmpassword"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
             </Label>
           </div>
         </LabelWrap>
-        <Button onClick={handleSubmit}>Créer mon compte</Button>
+        <Button type="submit">Créer mon compte</Button>
       </SignUpWrap>
     </Layout>
   );
