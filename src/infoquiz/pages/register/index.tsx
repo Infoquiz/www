@@ -104,7 +104,7 @@ export const Register = () => {
             <Label>
               <label>Ton mail :</label>
               <input
-                type="text"
+                type="email"
                 placeholder="exemple@blabla.com"
                 name="email"
                 onChange={formik.handleChange}
@@ -127,7 +127,7 @@ export const Register = () => {
             <Label>
               <label>Ton mot de passe :</label>
               <input
-                type="text"
+                type="password"
                 placeholder="Mot de passe"
                 name="password"
                 onChange={formik.handleChange}
@@ -139,7 +139,7 @@ export const Register = () => {
             <Label>
               <label>Confirme ton mot de passe :</label>
               <input
-                type="text"
+                type="password"
                 placeholder="Mot de passe"
                 name="confirmpassword"
                 onChange={formik.handleChange}

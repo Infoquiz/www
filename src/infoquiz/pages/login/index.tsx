@@ -52,11 +52,29 @@ const NotAccountTexte = styled.a`
 export const Login = () => {
   const history = useHistory();
 
+  const validate = (values) => {
+    const errors: any = {};
+    if (!values.email) {
+      errors.email = "Reequired";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email address";
+    }
+
+    if (!values.password) {
+      errors.password = "Required";
+    }
+
+    return errors;
+  };
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
+    validate,
     onSubmit: (values) => {
       LoginService(values).then(
         (resp) => {
@@ -82,6 +100,7 @@ export const Login = () => {
                 name="email"
                 onChange={formik.handleChange}
               />
+              {formik.errors.email ? <div>{formik.errors.email}</div> : null}
             </Label>
             <Label>
               <label htmlFor="password">Ton mot de passe :</label>
@@ -91,6 +110,9 @@ export const Login = () => {
                 name="password"
                 onChange={formik.handleChange}
               />
+              {formik.errors.password ? (
+                <div>{formik.errors.password}</div>
+              ) : null}
               <NotAccountTexte href="/register">
                 Pas encore de compte ?
               </NotAccountTexte>
