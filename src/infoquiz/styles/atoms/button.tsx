@@ -3,7 +3,7 @@ import Styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { Color } from "infoquiz/styles/consts";
 
-const ButtonBasic = Styled.div`
+const ButtonBasic = Styled.button`
   width: 220px;
    font-size: 14px;
    border:none;
@@ -29,9 +29,15 @@ const ButtonBasic = Styled.div`
 export const Button = ({
   onClick,
   children,
+  type,
 }: {
   onClick?: any;
   children: any;
+  type?: any;
 }) => {
-  return <ButtonBasic onClick={onClick}>{children}</ButtonBasic>;
+  return (
+    <ButtonBasic onClick={onClick} type={type}>
+      {children}
+    </ButtonBasic>
+  );
 };

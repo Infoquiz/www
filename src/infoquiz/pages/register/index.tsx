@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
 
 import { Layout } from "infoquiz/styles/layout";
 import { Logo } from "infoquiz/styles/atoms/logo";
@@ -10,7 +11,7 @@ import { Button } from "infoquiz/styles/atoms/button";
 
 import { CreateAccount } from "./services";
 
-const SignUpWrap = styled.div`
+const SignUpWrap = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,41 +31,75 @@ const LabelWrap = styled.div`
 
 export const Register = () => {
   const history = useHistory();
-  const initial_form_data = {
-    username: "",
-    email: "",
-    datebirth: "",
-    password: "",
+
+  const validate = (values) => {
+    const errors: any = {};
+    if (!values.username) {
+      errors.username = "Reequired";
+    } else if (values.username.length > 10) {
+      errors.username = "Must be 10 characters or less";
+    }
+
+    if (!values.email) {
+      errors.email = "Required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email address";
+    }
+    if (!values.datebirth) {
+      errors.datebirth = "Required";
+    }
+    if (!values.password) {
+      errors.password = "Required";
+    } else if (values.password !== values.confirmpassword) {
+      errors.password = "les mots de passent ne correspondent pas";
+    }
+
+    if (!values.confirmpassword) {
+      errors.confirmpassword = "Required";
+    }
+
+    return errors;
   };
 
-  const [form_data, updateFormData] = useState(initial_form_data);
-  const handleChange = (e) => {
-    updateFormData({
-      ...form_data,
-
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-
-  const handleSubmit = () => {
-    CreateAccount(form_data);
-    history.push("/login");
-  };
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      datebirth: "",
+      password: "",
+      confirmpassword: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      CreateAccount(values).then(
+        (resp) => {
+          localStorage.setItem("token", resp.accessToken);
+          history.push("/");
+        },
+        () => console.log("error")
+      );
+    },
+  });
 
   return (
     <Layout headerArrowBackHome footerWavePinkLower>
-      <SignUpWrap>
+      <SignUpWrap onSubmit={formik.handleSubmit}>
         <Logo />
         <LabelWrap>
           <div>
             <Label>
               <label>Ton prénom :</label>
               <input
-                type="name"
+                type="text"
                 placeholder="Ton prénom"
                 name="username"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
+              {formik.errors.username ? (
+                <div>{formik.errors.username}</div>
+              ) : null}
             </Label>
             <Label>
               <label>Ton mail :</label>
@@ -72,12 +107,20 @@ export const Register = () => {
                 type="email"
                 placeholder="exemple@blabla.com"
                 name="email"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
+              {formik.errors.email ? <div>{formik.errors.email}</div> : null}
             </Label>
             <Label>
               <label>Ta date de naissance :</label>
-              <input type="date" name="datebirth" onChange={handleChange} />
+              <input
+                type="date"
+                name="datebirth"
+                onChange={formik.handleChange}
+              />
+              {formik.errors.datebirth ? (
+                <div>{formik.errors.datebirth}</div>
+              ) : null}
             </Label>
           </div>
           <div>
@@ -87,8 +130,11 @@ export const Register = () => {
                 type="password"
                 placeholder="Mot de passe"
                 name="password"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
+              {formik.errors.password ? (
+                <div>{formik.errors.password}</div>
+              ) : null}
             </Label>
             <Label>
               <label>Confirme ton mot de passe :</label>
@@ -96,12 +142,15 @@ export const Register = () => {
                 type="password"
                 placeholder="Mot de passe"
                 name="confirmpassword"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
+              {formik.errors.confirmpassword ? (
+                <div>{formik.errors.confirmpassword}</div>
+              ) : null}
             </Label>
           </div>
         </LabelWrap>
-        <Button onClick={handleSubmit}>Créer mon compte</Button>
+        <Button type="submit">Créer mon compte</Button>
       </SignUpWrap>
     </Layout>
   );
