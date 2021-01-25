@@ -13,7 +13,7 @@ import { Input } from "infoquiz/styles/atoms/input";
 
 import { LoginService } from "./services";
 
-import LoginImage from "infoquiz/assets/illustrations/roquet.svg";
+import Roquet from "infoquiz/assets/illustrations/roquet.svg";
 
 const LoginWrap = styled.div`
   justify-content: center;
@@ -63,7 +63,7 @@ const NotAccountTexte = styled.a`
   }
 `;
 
-const Text = styled.p`
+const Text = styled.div`
   display: flex;
   align-items: center;
   font-weight: 800;
@@ -149,7 +149,7 @@ export const Login = () => {
               Me connecter
             </Button>
           </Inputs>
-          <img src={LoginImage} alt="" />
+          <img src={Roquet} alt="" />
         </Form>
       </LoginWrap>
     </Layout>
