@@ -6,5 +6,8 @@ export const Error = Styled.div`
   font-size:12px;
   margin:4px;
   color:${Color.pink};
-    ${rh.forTabletUp`font-size:16px   margin:6px;`} 
+  ${rh.forTabletUp`
+    font-size:16px;
+    margin:6px;
+    `} 
 `;

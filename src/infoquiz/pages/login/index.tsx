@@ -1,56 +1,48 @@
 import React from "react";
 import styled from "styled-components";
-import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
-import { Color } from "infoquiz/styles/consts";
 
+import { responsiveHelpers as rh } from "infoquiz/styles/utils";
+import { Color } from "infoquiz/styles/consts";
 import { Layout } from "infoquiz/styles/layout";
-import { Logo } from "infoquiz/styles/atoms/logo";
-import { Error } from "infoquiz/styles/atoms/error";
-import { Button } from "infoquiz/styles/atoms/button";
-import { Input } from "infoquiz/styles/atoms/input";
+import { Logo, Input, Button, Error } from "infoquiz/styles/atoms";
+import Roquet from "infoquiz/assets/illustrations/roquet.svg";
 
 import { LoginService } from "./services";
 
-import Roquet from "infoquiz/assets/illustrations/roquet.svg";
+const LoginContainer = styled.div`
+  width: 50%;
+  margin: 0 auto;
+`;
 
-const LoginWrap = styled.div`
-  justify-content: center;
-  align-items: center;
+const LoginWrapper = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 30px;
+  justify-content: space-between;
+  & > img {
+    display: none;
+  }
+  ${rh.forTabletUp`
+  & > img {
+    display:block;
+    width: 208px;
+  }`};
 `;
 
 const Form = styled.form`
   width: 100%;
-  display: flex;
-  flex-direction: column;
   margin-top: 15px;
   justify-content: space-between;
   & > a {
     width: 100%;
   }
-  & > img {
-    width: 108px;
-    margin: 15px auto;
-  }
   ${rh.forTabletUp`
-  flex-direction: row;
-  & > img {
-  width: 208px;
-  margin-left:  350px;
-  }`};
+  width: 366px;
+ `};
 `;
 
-const Inputs = styled.div`
-  width: 100%;
-  ${rh.forTabletUp` width: 366px;`};
-`;
-
-const NotAccountTexte = styled.a`
+const NotAccountText = styled.a`
   font-size: 12px;
   text-decoration: none;
   color: ${Color.grey};
@@ -63,7 +55,7 @@ const NotAccountTexte = styled.a`
   }
 `;
 
-const Text = styled.div`
+const Text = styled.p`
   display: flex;
   align-items: center;
   font-weight: 800;
@@ -111,47 +103,38 @@ export const Login = () => {
 
   return (
     <Layout headerArrowBackHome footerWavePinkLower>
-      <LoginWrap>
+      <LoginContainer>
         <div>
           <Text>
             Connexion à mon compte <Logo bigLogo={true} /> <span>.</span>
           </Text>
-          <NotAccountTexte href="/register">
+          <NotAccountText href="/register">
             Pas encore de compte ?<span>Crée en un</span>
-          </NotAccountTexte>
+          </NotAccountText>
         </div>
-
-        <Form onSubmit={formik.handleSubmit}>
-          <Inputs>
-            <Input>
-              <input
-                type="email"
-                placeholder="Mail"
-                name="email"
-                onChange={formik.handleChange}
-              />
-              {formik.errors.email ? (
-                <Error>{formik.errors.email}</Error>
-              ) : null}
-            </Input>
-            <Input>
-              <input
-                type="password"
-                placeholder="Mot de passe"
-                name="password"
-                onChange={formik.handleChange}
-              />
-              {formik.errors.password ? (
-                <Error>{formik.errors.password}</Error>
-              ) : null}
-            </Input>
+        <LoginWrapper>
+          <Form onSubmit={formik.handleSubmit}>
+            <Input
+              type="email"
+              placeholder="Mail"
+              name="email"
+              onChange={formik.handleChange}
+            />
+            {formik.errors.email && <Error>{formik.errors.email}</Error>}
+            <Input
+              type="password"
+              placeholder="Mot de passe"
+              name="password"
+              onChange={formik.handleChange}
+            />
+            {formik.errors.password && <Error>{formik.errors.password}</Error>}
             <Button type="submit" fill={false}>
               Me connecter
             </Button>
-          </Inputs>
-          <img src={Roquet} alt="" />
-        </Form>
-      </LoginWrap>
+          </Form>
+          <img src={Roquet} alt="fusée" />
+        </LoginWrapper>
+      </LoginContainer>
     </Layout>
   );
 };

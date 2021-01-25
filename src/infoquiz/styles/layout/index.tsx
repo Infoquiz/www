@@ -6,11 +6,10 @@ import { Footer } from "infoquiz/styles/atoms/footer";
 import { Header } from "infoquiz/styles/atoms/header";
 
 const WrapLayout = Styled.div`
- min-height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
   background-color:${Color.lightGrey};
   font-family: "Poppins";
 `;
