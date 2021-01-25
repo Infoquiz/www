@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 
 import { Layout } from "infoquiz/styles/layout";
 import { Logo } from "infoquiz/styles/atoms/logo";
-import { Label } from "infoquiz/styles/atoms/label";
+import { Input } from "infoquiz/styles/atoms/input";
 import { Button } from "infoquiz/styles/atoms/button";
 
 import { CreateAccount } from "./services";
@@ -89,8 +89,7 @@ export const Register = () => {
         <Logo />
         <LabelWrap>
           <div>
-            <Label>
-              <label>Ton prénom :</label>
+            <Input>
               <input
                 type="text"
                 placeholder="Ton prénom"
@@ -100,9 +99,8 @@ export const Register = () => {
               {formik.errors.username ? (
                 <div>{formik.errors.username}</div>
               ) : null}
-            </Label>
-            <Label>
-              <label>Ton mail :</label>
+            </Input>
+            <Input>
               <input
                 type="email"
                 placeholder="exemple@blabla.com"
@@ -110,9 +108,8 @@ export const Register = () => {
                 onChange={formik.handleChange}
               />
               {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-            </Label>
-            <Label>
-              <label>Ta date de naissance :</label>
+            </Input>
+            <Input>
               <input
                 type="date"
                 name="datebirth"
@@ -121,11 +118,10 @@ export const Register = () => {
               {formik.errors.datebirth ? (
                 <div>{formik.errors.datebirth}</div>
               ) : null}
-            </Label>
+            </Input>
           </div>
           <div>
-            <Label>
-              <label>Ton mot de passe :</label>
+            <Input>
               <input
                 type="password"
                 placeholder="Mot de passe"
@@ -135,9 +131,8 @@ export const Register = () => {
               {formik.errors.password ? (
                 <div>{formik.errors.password}</div>
               ) : null}
-            </Label>
-            <Label>
-              <label>Confirme ton mot de passe :</label>
+            </Input>
+            <Input>
               <input
                 type="password"
                 placeholder="Mot de passe"
@@ -147,7 +142,7 @@ export const Register = () => {
               {formik.errors.confirmpassword ? (
                 <div>{formik.errors.confirmpassword}</div>
               ) : null}
-            </Label>
+            </Input>
           </div>
         </LabelWrap>
         <Button type="submit">Créer mon compte</Button>

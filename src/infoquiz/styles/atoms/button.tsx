@@ -4,15 +4,16 @@ import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { Color } from "infoquiz/styles/consts";
 
 const ButtonBasic = Styled.button`
-  width: 220px;
+   width: 100%;
    font-size: 14px;
-   border:none;
    text-align: center;
-   margin: 20px;
-   color:${Color.lightGrey};
-   background-color: ${Color.pink};
-   padding: 10px 20px;
-   border-radius: 10px;
+   margin: 5px 0;
+   color: ${(props) => (props.fill ? Color.lightGrey : Color.pink)} ;
+   background-color: ${(props) => (props.fill ? Color.pink : "transparent")};
+   border:${(props) =>
+     props.fill ? "transparent" : `${Color.pink} solid 3px`};
+   padding: 12px 0px;
+   border-radius: 6px;
    font-weight:600;
    cursor:pointer;
    &>a{
@@ -20,23 +21,24 @@ const ButtonBasic = Styled.button`
       color:${Color.lightGrey} ;
      }
    ${rh.forMobileUp`
-    width: 280px;
-    padding: 15px 27px;
     font-size: 16px;`};
-    ${rh.forTabletUp`font-size: 18px;`} 
+    ${rh.forTabletUp`font-size: 18px;  margin: 10px 0;`} 
+    
 `;
 
 export const Button = ({
   onClick,
   children,
   type,
+  fill,
 }: {
   onClick?: any;
   children: any;
   type?: any;
+  fill?: boolean;
 }) => {
   return (
-    <ButtonBasic onClick={onClick} type={type}>
+    <ButtonBasic onClick={onClick} type={type} fill={fill}>
       {children}
     </ButtonBasic>
   );

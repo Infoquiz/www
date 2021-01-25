@@ -5,8 +5,11 @@ import { Color } from "infoquiz/styles/consts";
 
 const LogoInfoquiz = Styled.div`
   font-weight:800;
-  font-size: 22px;
- ${rh.forTabletUp`font-size: 28px;`}
+  margin-left:5px;
+  font-size: ${(props) => (props.bigLogo ? "26px" : "22px")};
+  color:black;
+ ${rh.forTabletUp`${(props) =>
+   props.bigLogo ? "font-size:36px" : "font-size:28px"}`}
  & > p {
     & > span{ 
       color: ${Color.pink}
@@ -14,9 +17,9 @@ const LogoInfoquiz = Styled.div`
    }
 `;
 
-export const Logo = () => {
+export const Logo = ({ bigLogo }: { bigLogo?: boolean }) => {
   return (
-    <LogoInfoquiz>
+    <LogoInfoquiz bigLogo={bigLogo}>
       <p>
         infoqui<span>z</span>
       </p>
