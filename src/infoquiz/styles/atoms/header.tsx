@@ -22,20 +22,20 @@ font-weight:600;
 text-decoration: none;
 margin-left: 15px;
 font-size: 14px;
-color: ${Color.turquoise};
-border: 1.5px solid ${Color.turquoise};
+color: ${Color.pink};
 padding: 6px 10px;
-border-radius: 10px;`;
+border-radius: 6px;  
+`;
 
 const ButtonCreateAccount = Styled.a`
 font-weight:600;
 text-decoration: none;
 margin-left: 15px;
 font-size: 14px;
-color: ${Color.turquoise};
-border: 1.5px solid ${Color.turquoise};
-padding: 6px 10px;
-border-radius: 10px;  
+color: ${Color.lightGrey};
+background-color: ${Color.pink};
+padding: 5px 20px;
+border-radius: 6px;  
 display: none;
 ${rh.forTabletUp`font-size: 18px;`}
 ${rh.forMobileUp`display: inline;`}
