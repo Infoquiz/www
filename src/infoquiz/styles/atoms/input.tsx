@@ -1,28 +1,24 @@
 import React from "react";
 import Styled from "styled-components";
 import { responsiveHelpers as rh } from "infoquiz/styles/utils";
+import { Color } from "infoquiz/styles/consts";
 
 const Wrap = Styled.div`
   margin: 10px 0;
   & > input {
   ::placeholder {
-  color:  #807a7a;
+  color: ${Color.grey};
   font-size: 14px;
   ${rh.forTabletUp`font-size: 18px;`};
   }
     width: 100%;
     transition: ease 0.1s;
-    background-color: rgba(128, 123, 123, 0.07);
+    background-color: ${Color.darkWhite};
     margin-top: 5px;
-    border: 2px solid rgba(204,198,198,0.5);
+    border: 2px solid ${Color.mediumGrey} ;
     border-radius: 6px;
     padding: 10px 15px;
     ${rh.forTabletUp`padding: 14px 19px; margin-top:10px`};
-    &:focus {
-      transition: ease 0.1s;
-      background-color: $turquoise;
-      border: 1px solid #555;
-    }
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,

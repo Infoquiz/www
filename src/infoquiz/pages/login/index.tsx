@@ -50,7 +50,7 @@ const Inputs = styled.div`
   ${rh.forTabletUp` width: 366px;`};
 `;
 
-const NotAccountTexte = styled.a`
+const NotAccountText = styled.a`
   font-size: 12px;
   text-decoration: none;
   color: ${Color.grey};
@@ -83,7 +83,7 @@ export const Login = () => {
     const errors: any = {};
     if (!values.email) {
       errors.email =
-        "Impossible de trouver un compte correspondant à cette adresse e-mail";
+        "Impossible de trouver un compte correspondant à cette adresse mail";
     }
     if (!values.password) {
       errors.password = "Votre mot de passe est incorrect";
@@ -116,9 +116,9 @@ export const Login = () => {
           <Text>
             Connexion à mon compte <Logo bigLogo={true} /> <span>.</span>
           </Text>
-          <NotAccountTexte href="/register">
+          <NotAccountText href="/register">
             Pas encore de compte ?<span>Crée en un</span>
-          </NotAccountTexte>
+          </NotAccountText>
         </div>
 
         <Form onSubmit={formik.handleSubmit}>

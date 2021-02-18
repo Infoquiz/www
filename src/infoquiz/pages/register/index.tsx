@@ -18,14 +18,18 @@ import Roquet from "infoquiz/assets/illustrations/roquet.svg";
 const SignUpWrap = styled.form`
   display: flex;
   flex-direction: column;
-  & > img {
-  }
+  ${rh.forTabletUp`flex-direction: row;`};
 `;
 
 const LabelWrap = styled.div`
   justify-content: space-between;
   padding: 15px;
   width: 100%;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const Text = styled.div`
@@ -41,7 +45,7 @@ const Text = styled.div`
   }
 `;
 
-const NotAccountTexte = styled.a`
+const NotAccountText = styled.a`
   font-size: 12px;
   text-decoration: none;
   color: ${Color.grey};
@@ -62,7 +66,7 @@ export const Register = () => {
     if (!values.username) {
       errors.username = "Votre pseudo est manquant";
     } else if (values.username.length > 5) {
-      errors.username = "Votre pseudo doit contenir 5 caractère au minimum";
+      errors.username = "Votre pseudo doit contenir 5 caractères au minimum";
     }
 
     if (!values.email) {
@@ -73,15 +77,15 @@ export const Register = () => {
       errors.email = "Votre email a un format non valide";
     }
     if (!values.datebirth) {
-      errors.datebirth = "Votre date de naissance est manquant";
+      errors.datebirth = "Votre date de naissance est manquante";
     }
     if (!values.password) {
       errors.password = "Votre mot de passe est manquant";
-    } else if (values.password !== values.confirmpassword) {
+    } else if (values.password !== values.confirmPassword) {
       errors.password = "les mots de passent ne correspondent pas";
     }
-    if (!values.confirmpassword) {
-      errors.confirmpassword =
+    if (!values.confirmPassword) {
+      errors.confirmPassword =
         "Votre mot de passe de confirmation est manquant";
     }
 
@@ -94,7 +98,7 @@ export const Register = () => {
       email: "",
       datebirth: "",
       password: "",
-      confirmpassword: "",
+      confirmPassword: "",
     },
     validate,
     onSubmit: (values) => {
@@ -111,75 +115,77 @@ export const Register = () => {
   return (
     <Layout headerArrowBackHome footerWavePinkLower>
       <SignUpWrap onSubmit={formik.handleSubmit}>
-        <div>
-          <Text>
-            Crée ton compte
-            <Logo bigLogo={true} /> <span>.</span>
-          </Text>
-          <NotAccountTexte href="/login">
-            Tu as déjà un compte ?<span>Connecte-toi</span>
-          </NotAccountTexte>
-        </div>
+        <Container>
+          <div>
+            <Text>
+              Crée ton compte
+              <Logo bigLogo={true} /> <span>.</span>
+            </Text>
+            <NotAccountText href="/login">
+              Tu as déjà un compte ?<span>Connecte-toi</span>
+            </NotAccountText>
+          </div>
 
-        <LabelWrap>
-          <div>
-            <Input>
-              <input
-                type="text"
-                placeholder="Ton prénom"
-                name="username"
-                onChange={formik.handleChange}
-              />
-              {formik.errors.username ? (
-                <Error>{formik.errors.username}</Error>
-              ) : null}
-            </Input>
-            <Input>
-              <input
-                type="email"
-                placeholder="exemple@blabla.com"
-                name="email"
-                onChange={formik.handleChange}
-              />
-              {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-            </Input>
-            <Input>
-              <input
-                type="date"
-                name="datebirth"
-                onChange={formik.handleChange}
-              />
-              {formik.errors.datebirth ? (
-                <Error>{formik.errors.datebirth}</Error>
-              ) : null}
-            </Input>
-          </div>
-          <div>
-            <Input>
-              <input
-                type="password"
-                placeholder="Mot de passe"
-                name="password"
-                onChange={formik.handleChange}
-              />
-              {formik.errors.password ? (
-                <Error>{formik.errors.password}</Error>
-              ) : null}
-            </Input>
-            <Input>
-              <input
-                type="password"
-                placeholder="Mot de passe"
-                name="confirmpassword"
-                onChange={formik.handleChange}
-              />
-              {formik.errors.confirmpassword ? (
-                <Error>{formik.errors.confirmpassword}</Error>
-              ) : null}
-            </Input>
-          </div>
-          <Button type="submit">Créer mon compte</Button>
-        </LabelWrap>
+          <LabelWrap>
+            <div>
+              <Input>
+                <input
+                  type="text"
+                  placeholder="Ton prénom"
+                  name="username"
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.username ? (
+                  <Error>{formik.errors.username}</Error>
+                ) : null}
+              </Input>
+              <Input>
+                <input
+                  type="email"
+                  placeholder="exemple@blabla.com"
+                  name="email"
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+              </Input>
+              <Input>
+                <input
+                  type="date"
+                  name="datebirth"
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.datebirth ? (
+                  <Error>{formik.errors.datebirth}</Error>
+                ) : null}
+              </Input>
+            </div>
+            <div>
+              <Input>
+                <input
+                  type="password"
+                  placeholder="Mot de passe"
+                  name="password"
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.password ? (
+                  <Error>{formik.errors.password}</Error>
+                ) : null}
+              </Input>
+              <Input>
+                <input
+                  type="password"
+                  placeholder="Mot de passe"
+                  name="confirmPassword"
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.confirmPassword ? (
+                  <Error>{formik.errors.confirmPassword}</Error>
+                ) : null}
+              </Input>
+            </div>
+            <Button type="submit">Créer mon compte</Button>
+          </LabelWrap>
+        </Container>
         <img src={Roquet} alt="" />
       </SignUpWrap>
     </Layout>
