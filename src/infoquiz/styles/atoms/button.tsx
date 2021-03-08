@@ -31,12 +31,11 @@ export const Button = ({
   children,
   type,
   fill,
-}: {
-  onClick?: any;
-  children: any;
-  type?: any;
+}: React.PropsWithChildren<{
+  onClick?: () => void;
+  type?: string;
   fill?: boolean;
-}) => {
+}>) => {
   return (
     <ButtonBasic onClick={onClick} type={type} fill={fill}>
       {children}

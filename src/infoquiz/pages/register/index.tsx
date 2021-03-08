@@ -1,61 +1,70 @@
 import React from "react";
 import styled from "styled-components";
-import { responsiveHelpers as rh } from "infoquiz/styles/utils";
-import { Color } from "infoquiz/styles/consts";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 
+import { Color } from "infoquiz/styles/consts";
+import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { Layout } from "infoquiz/styles/layout";
-import { Logo } from "infoquiz/styles/atoms/logo";
-import { Input } from "infoquiz/styles/atoms/input";
-import { Button } from "infoquiz/styles/atoms/button";
-import { Error } from "infoquiz/styles/atoms/error";
+import { Logo, Input, Button, Error } from "infoquiz/styles/atoms";
+import Roquet from "infoquiz/assets/illustrations/roquet.svg";
 
 import { CreateAccount } from "./services";
 
-import Roquet from "infoquiz/assets/illustrations/roquet.svg";
-
-const SignUpWrap = styled.form`
-  display: flex;
-  flex-direction: column;
-  ${rh.forTabletUp`flex-direction: row;`};
+const RegisterContainer = styled.div`
+  width: 50%;
+  margin: 0 auto;
 `;
 
-const LabelWrap = styled.div`
+const RegisterWrapper = styled.div`
+  display: flex;
   justify-content: space-between;
-  padding: 15px;
+  & > img {
+    display: none;
+    transform: rotate(-30deg);
+    ${rh.forTabletUp`
+    display:block;
+    width: 208px;
+    `};
+  }
+
+  ${rh.forTabletUp`
+  & > img {
+    width: 208px;
+  }`};
+`;
+
+const Form = styled.form`
+  justify-content: space-between;
+  padding: 15px 0;
   width: 100%;
+  ${rh.forTabletUp`
+    width: 366px;
+ `};
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Text = styled.div`
-  display: flex;
-  align-items: center;
+const Text = styled.p`
   font-weight: 800;
   font-size: 22px;
   margin-bottom: 10px;
-  ${rh.forTabletUp`font-size: 36px; margin-bottom:15px;`};
   color: ${Color.pink};
   & > span {
     color: black;
   }
+  ${rh.forTabletUp`font-size: 36px; margin-bottom:15px;`};
 `;
 
 const NotAccountText = styled.a`
   font-size: 12px;
   text-decoration: none;
   color: ${Color.grey};
-  ${rh.forTabletUp`font-size: 14px;`};
   & > span {
     text-decoration: underline 2px;
     font-weight: 600;
     color: ${Color.pink};
     margin-left: 5px;
   }
+  ${rh.forTabletUp`font-size: 14px;`};
 `;
 
 export const Register = () => {
@@ -114,80 +123,72 @@ export const Register = () => {
 
   return (
     <Layout headerArrowBackHome footerWavePinkLower>
-      <SignUpWrap onSubmit={formik.handleSubmit}>
-        <Container>
-          <div>
-            <Text>
-              Crée ton compte
-              <Logo bigLogo={true} /> <span>.</span>
-            </Text>
-            <NotAccountText href="/login">
-              Tu as déjà un compte ?<span>Connecte-toi</span>
-            </NotAccountText>
-          </div>
-
-          <LabelWrap>
-            <div>
-              <Input>
-                <input
-                  type="text"
-                  placeholder="Ton prénom"
-                  name="username"
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.username ? (
-                  <Error>{formik.errors.username}</Error>
-                ) : null}
-              </Input>
-              <Input>
-                <input
-                  type="email"
-                  placeholder="exemple@blabla.com"
-                  name="email"
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-              </Input>
-              <Input>
-                <input
-                  type="date"
-                  name="datebirth"
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.datebirth ? (
-                  <Error>{formik.errors.datebirth}</Error>
-                ) : null}
-              </Input>
-            </div>
-            <div>
-              <Input>
-                <input
-                  type="password"
-                  placeholder="Mot de passe"
-                  name="password"
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.password ? (
-                  <Error>{formik.errors.password}</Error>
-                ) : null}
-              </Input>
-              <Input>
-                <input
-                  type="password"
-                  placeholder="Mot de passe"
-                  name="confirmPassword"
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.confirmPassword ? (
-                  <Error>{formik.errors.confirmPassword}</Error>
-                ) : null}
-              </Input>
-            </div>
+      <RegisterContainer>
+        <div>
+          <Text>
+            Crée ton compte
+            <Logo bigLogo={true} />
+            <span>.</span>
+          </Text>
+          <NotAccountText href="/login">
+            Tu as déjà un compte ? <span>Connecte-toi</span>
+          </NotAccountText>
+        </div>
+        <RegisterWrapper>
+          <Form onSubmit={formik.handleSubmit}>
+            <Input>
+              <input
+                type="text"
+                placeholder="Ton prénom"
+                name="username"
+                onChange={formik.handleChange}
+              />
+            </Input>
+            {formik.errors.username && <Error>{formik.errors.username}</Error>}
+            <Input>
+              <input
+                type="email"
+                placeholder="exemple@blabla.com"
+                name="email"
+                onChange={formik.handleChange}
+              />
+            </Input>
+            {formik.errors.email && <div>{formik.errors.email}</div>}
+            <Input>
+              <input
+                type="date"
+                name="datebirth"
+                onChange={formik.handleChange}
+              />
+            </Input>
+            {formik.errors.datebirth && (
+              <Error>{formik.errors.datebirth}</Error>
+            )}
+            <Input>
+              <input
+                type="password"
+                placeholder="Mot de passe"
+                name="password"
+                onChange={formik.handleChange}
+              />
+            </Input>
+            {formik.errors.password && <Error>{formik.errors.password}</Error>}
+            <Input>
+              <input
+                type="password"
+                placeholder="Mot de passe"
+                name="confirmpassword"
+                onChange={formik.handleChange}
+              />
+            </Input>
+            {formik.errors.confirmPassword && (
+              <Error>{formik.errors.confirmPassword}</Error>
+            )}
             <Button type="submit">Créer mon compte</Button>
-          </LabelWrap>
-        </Container>
-        <img src={Roquet} alt="" />
-      </SignUpWrap>
+          </Form>
+          <img src={Roquet} alt="fusée" />
+        </RegisterWrapper>
+      </RegisterContainer>
     </Layout>
   );
 };

@@ -26,10 +26,7 @@ const Wrap = Styled.div`
     transition: all 0s 50000s;
   }
   }
-  & > label {
-    font-size: 14px;
-    ${rh.forTabletUp`font-size: 18px;`};
-  }`;
+`;
 
 export const Input = ({ children }) => {
   return <Wrap>{children}</Wrap>;
