@@ -1,32 +1,70 @@
 import React from "react";
 import styled from "styled-components";
-import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 
+import { Color } from "infoquiz/styles/consts";
+import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { Layout } from "infoquiz/styles/layout";
-import { Logo } from "infoquiz/styles/atoms/logo";
-import { Label } from "infoquiz/styles/atoms/label";
-import { Button } from "infoquiz/styles/atoms/button";
+import { Logo, Input, Button, Error } from "infoquiz/styles/atoms";
+import Roquet from "infoquiz/assets/illustrations/roquet.svg";
 
 import { CreateAccount } from "./services";
 
-const SignUpWrap = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const RegisterContainer = styled.div`
+  width: 50%;
+  margin: 0 auto;
 `;
 
-const LabelWrap = styled.div`
+const RegisterWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  margin: 10px 0 10px 0;
-  padding: 15px;
+  & > img {
+    display: none;
+    transform: rotate(-30deg);
+    ${rh.forTabletUp`
+    display:block;
+    width: 208px;
+    `};
+  }
+
   ${rh.forTabletUp`
-  flex-direction: row;
-  margin: 60px 0 30px 0;
-`};
+  & > img {
+    width: 208px;
+  }`};
+`;
+
+const Form = styled.form`
+  justify-content: space-between;
+  padding: 15px 0;
+  width: 100%;
+  ${rh.forTabletUp`
+    width: 366px;
+ `};
+`;
+
+const Text = styled.p`
+  font-weight: 800;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: ${Color.pink};
+  & > span {
+    color: black;
+  }
+  ${rh.forTabletUp`font-size: 36px; margin-bottom:15px;`};
+`;
+
+const NotAccountText = styled.a`
+  font-size: 12px;
+  text-decoration: none;
+  color: ${Color.grey};
+  & > span {
+    text-decoration: underline 2px;
+    font-weight: 600;
+    color: ${Color.pink};
+    margin-left: 5px;
+  }
+  ${rh.forTabletUp`font-size: 14px;`};
 `;
 
 export const Register = () => {
@@ -35,29 +73,29 @@ export const Register = () => {
   const validate = (values) => {
     const errors: any = {};
     if (!values.username) {
-      errors.username = "Reequired";
-    } else if (values.username.length > 10) {
-      errors.username = "Must be 10 characters or less";
+      errors.username = "Votre pseudo est manquant";
+    } else if (values.username.length > 5) {
+      errors.username = "Votre pseudo doit contenir 5 caractères au minimum";
     }
 
     if (!values.email) {
-      errors.email = "Required";
+      errors.email = "Votre email est manquant";
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      errors.email = "Invalid email address";
+      errors.email = "Votre email a un format non valide";
     }
     if (!values.datebirth) {
-      errors.datebirth = "Required";
+      errors.datebirth = "Votre date de naissance est manquante";
     }
     if (!values.password) {
-      errors.password = "Required";
-    } else if (values.password !== values.confirmpassword) {
+      errors.password = "Votre mot de passe est manquant";
+    } else if (values.password !== values.confirmPassword) {
       errors.password = "les mots de passent ne correspondent pas";
     }
-
-    if (!values.confirmpassword) {
-      errors.confirmpassword = "Required";
+    if (!values.confirmPassword) {
+      errors.confirmPassword =
+        "Votre mot de passe de confirmation est manquant";
     }
 
     return errors;
@@ -69,7 +107,7 @@ export const Register = () => {
       email: "",
       datebirth: "",
       password: "",
-      confirmpassword: "",
+      confirmPassword: "",
     },
     validate,
     onSubmit: (values) => {
@@ -85,73 +123,72 @@ export const Register = () => {
 
   return (
     <Layout headerArrowBackHome footerWavePinkLower>
-      <SignUpWrap onSubmit={formik.handleSubmit}>
-        <Logo />
-        <LabelWrap>
-          <div>
-            <Label>
-              <label>Ton prénom :</label>
+      <RegisterContainer>
+        <div>
+          <Text>
+            Crée ton compte
+            <Logo bigLogo={true} />
+            <span>.</span>
+          </Text>
+          <NotAccountText href="/login">
+            Tu as déjà un compte ? <span>Connecte-toi</span>
+          </NotAccountText>
+        </div>
+        <RegisterWrapper>
+          <Form onSubmit={formik.handleSubmit}>
+            <Input>
               <input
                 type="text"
                 placeholder="Ton prénom"
                 name="username"
                 onChange={formik.handleChange}
               />
-              {formik.errors.username ? (
-                <div>{formik.errors.username}</div>
-              ) : null}
-            </Label>
-            <Label>
-              <label>Ton mail :</label>
+            </Input>
+            {formik.errors.username && <Error>{formik.errors.username}</Error>}
+            <Input>
               <input
                 type="email"
                 placeholder="exemple@blabla.com"
                 name="email"
                 onChange={formik.handleChange}
               />
-              {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-            </Label>
-            <Label>
-              <label>Ta date de naissance :</label>
+            </Input>
+            {formik.errors.email && <div>{formik.errors.email}</div>}
+            <Input>
               <input
                 type="date"
                 name="datebirth"
                 onChange={formik.handleChange}
               />
-              {formik.errors.datebirth ? (
-                <div>{formik.errors.datebirth}</div>
-              ) : null}
-            </Label>
-          </div>
-          <div>
-            <Label>
-              <label>Ton mot de passe :</label>
+            </Input>
+            {formik.errors.datebirth && (
+              <Error>{formik.errors.datebirth}</Error>
+            )}
+            <Input>
               <input
                 type="password"
                 placeholder="Mot de passe"
                 name="password"
                 onChange={formik.handleChange}
               />
-              {formik.errors.password ? (
-                <div>{formik.errors.password}</div>
-              ) : null}
-            </Label>
-            <Label>
-              <label>Confirme ton mot de passe :</label>
+            </Input>
+            {formik.errors.password && <Error>{formik.errors.password}</Error>}
+            <Input>
               <input
                 type="password"
                 placeholder="Mot de passe"
                 name="confirmpassword"
                 onChange={formik.handleChange}
               />
-              {formik.errors.confirmpassword ? (
-                <div>{formik.errors.confirmpassword}</div>
-              ) : null}
-            </Label>
-          </div>
-        </LabelWrap>
-        <Button type="submit">Créer mon compte</Button>
-      </SignUpWrap>
+            </Input>
+            {formik.errors.confirmPassword && (
+              <Error>{formik.errors.confirmPassword}</Error>
+            )}
+            <Button type="submit">Créer mon compte</Button>
+          </Form>
+          <img src={Roquet} alt="fusée" />
+        </RegisterWrapper>
+      </RegisterContainer>
     </Layout>
   );
 };

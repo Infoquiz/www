@@ -1,52 +1,71 @@
 import React from "react";
 import styled from "styled-components";
-import { responsiveHelpers as rh } from "infoquiz/styles/utils";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 
+import { responsiveHelpers as rh } from "infoquiz/styles/utils";
+import { Color } from "infoquiz/styles/consts";
 import { Layout } from "infoquiz/styles/layout";
-import { Logo } from "infoquiz/styles/atoms/logo";
-import { Button } from "infoquiz/styles/atoms/button";
-import { Label } from "infoquiz/styles/atoms/label";
+import { Logo, Input, Button, Error } from "infoquiz/styles/atoms";
+import Roquet from "infoquiz/assets/illustrations/roquet.svg";
 
 import { LoginService } from "./services";
 
-import LoginImage from "infoquiz/assets/illustrations/illustrationBoy-login.png";
+const LoginContainer = styled.div`
+  width: 50%;
+  margin: 0 auto;
+`;
 
-const LoginWrap = styled.div`
-  justify-content: center;
-  align-items: center;
+const LoginWrapper = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  width: 220px;
+  justify-content: space-between;
   & > img {
-    width: 250px;
+    display: none;
   }
-  margin: 30px;
   ${rh.forTabletUp`
-  flex-direction:row;  
-  width:100%; 
   & > img {
-  width: 330px;
+    display:block;
+    width: 208px;
   }`};
 `;
 
 const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  align-items: center;
+  width: 100%;
+  margin-top: 15px;
+  justify-content: space-between;
   & > a {
     width: 100%;
   }
-  ${rh.forTabletUp`width:300px; margin:50px;`};
+  ${rh.forTabletUp`
+  width: 366px;
+ `};
 `;
 
-const NotAccountTexte = styled.a`
+const NotAccountText = styled.a`
   font-size: 12px;
-  color: black;
-  text-decoration: underline;
+  text-decoration: none;
+  color: ${Color.grey};
   ${rh.forTabletUp`font-size: 14px;`};
+  & > span {
+    text-decoration: underline 2px;
+    font-weight: 600;
+    color: ${Color.pink};
+    margin-left: 5px;
+  }
+`;
+
+const Text = styled.p`
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 22px;
+  margin-bottom: 10px;
+  ${rh.forTabletUp`font-size: 36px; margin-bottom:15px;`};
+  color: ${Color.pink};
+  & > span {
+    color: black;
+  }
 `;
 
 export const Login = () => {
@@ -55,15 +74,11 @@ export const Login = () => {
   const validate = (values) => {
     const errors: any = {};
     if (!values.email) {
-      errors.email = "Reequired";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-      errors.email = "Invalid email address";
+      errors.email =
+        "Impossible de trouver un compte correspondant à cette adresse mail";
     }
-
     if (!values.password) {
-      errors.password = "Required";
+      errors.password = "Votre mot de passe est incorrect";
     }
 
     return errors;
@@ -88,40 +103,42 @@ export const Login = () => {
 
   return (
     <Layout headerArrowBackHome footerWavePinkLower>
-      <LoginWrap>
-        <Form onSubmit={formik.handleSubmit}>
-          <Logo />
-          <div>
-            <Label>
-              <label htmlFor="email">Ton mail :</label>
+      <LoginContainer>
+        <div>
+          <Text>
+            Connexion à mon compte <Logo bigLogo={true} /> <span>.</span>
+          </Text>
+          <NotAccountText href="/register">
+            Pas encore de compte ?<span>Crée en un</span>
+          </NotAccountText>
+        </div>
+        <LoginWrapper>
+          <Form onSubmit={formik.handleSubmit}>
+            <Input>
               <input
                 type="email"
                 placeholder="Mail"
                 name="email"
                 onChange={formik.handleChange}
               />
-              {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-            </Label>
-            <Label>
-              <label htmlFor="password">Ton mot de passe :</label>
+            </Input>
+            {formik.errors.email && <Error>{formik.errors.email}</Error>}
+            <Input>
               <input
                 type="password"
                 placeholder="Mot de passe"
                 name="password"
                 onChange={formik.handleChange}
               />
-              {formik.errors.password ? (
-                <div>{formik.errors.password}</div>
-              ) : null}
-              <NotAccountTexte href="/register">
-                Pas encore de compte ?
-              </NotAccountTexte>
-            </Label>
-          </div>
-          <Button type="submit">Se connecter</Button>
-        </Form>
-        <img src={LoginImage} alt="" />
-      </LoginWrap>
+            </Input>
+            {formik.errors.password && <Error>{formik.errors.password}</Error>}
+            <Button type="submit" fill={false}>
+              Me connecter
+            </Button>
+          </Form>
+          <img src={Roquet} alt="fusée" />
+        </LoginWrapper>
+      </LoginContainer>
     </Layout>
   );
 };
